@@ -12,7 +12,9 @@ def parse():
     parser = argparse.ArgumentParser()
     parser.add_argument('--l', help='l - length of the music')
     parser.add_argument('--o', help='o - path to output file')
-    parser.add_argument('--s', help='s - scale of chords\n //list here')
+    parser.add_argument('--s', help='s - scale of chords choose from: \'minor\',\
+                                    \'major\', \'C\', \'E\',\'AGH\', \'revolution\',\
+                                     \'weird\', \'single\',\'dominant\', \'default\'')
     parser.add_argument('--bpm', help='bpm - beats per minute. Range 0-600. Best outcome using 100-400')
     args = parser.parse_args()
     args = vars(args)
@@ -39,15 +41,15 @@ def parse():
         print("Using default value of BPM.")
         bpm = 220
     bpm = int(bpm)
-    if not (bpm >= 0 and bpm <= 600):
+    if not (0 <= bpm <= 600):
         print("Wrong value. Using default value of BPM.")
         bpm = 220
-
 
     path = args['o']
     if path is None or not path.endswith(".mid"):
         print("Using default myfile.mid")
         path = "myfile.mid"
+
 
 def main():
     parse()

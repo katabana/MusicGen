@@ -1,13 +1,14 @@
 from miditime.miditime import MIDITime
 import musicnotes
 
+
 def generate_file(filename, time, option, bpm):
-    # Instantiate the class with a tempo (120bpm is the default) and an output file destination.
+
     mymidi = MIDITime(bpm, filename)
 
     # Create a list of notes. Each note is a list: [time, pitch, velocity, duration]
-
-    midinotes = musicnotes.generate_notes(time, 0, option)
+    sounds = musicnotes.Notes(time, 0, option)
+    midinotes = sounds.notes
 
     magicnotes = [
         [0, 61, 127, 3],
