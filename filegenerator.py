@@ -1,12 +1,20 @@
 from miditime.miditime import MIDITime
+from os import path
+from os import makedirs
 import musicnotes
 
+# generates midi file
+def generate_file(filepath, time, option, bpm):
 
-def generate_file(filename, time, option, bpm):
+    directory = path.dirname(filepath)
+    # if path is not created, makes one
+    if directory != '' and not path.exists(directory):
+        makedirs(directory)
 
-    mymidi = MIDITime(bpm, filename)
+    mymidi = MIDITime(bpm, filepath)
 
     # Create a list of notes. Each note is a list: [time, pitch, velocity, duration]
+    # notes as an object
     sounds = musicnotes.Notes(time, 0, option)
     midinotes = sounds.notes
 
@@ -27,8 +35,8 @@ def generate_file(filename, time, option, bpm):
         [33, 61, 90, 3],
     ]
 
-    if filename == 'magic.mid':
-        mymidi = MIDITime(240, filename)
+    if filepath.endswith('magic.mid'):
+        mymidi = MIDITime(240, filepath)
         mymidi.add_track(magicnotes)
         mymidi.save_midi()
         exit(0)

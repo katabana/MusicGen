@@ -1,6 +1,6 @@
 import sys
 import argparse
-import generator
+import filegenerator
 
 
 assert sys.version >= '3.0', "This program does not work with older versions of Python.\
@@ -53,10 +53,7 @@ def parse():
 
 def main():
     parse()
-    generator.generate_file(path, time, scale, bpm)
+    filegenerator.generate_file(path, time, scale, bpm)
 
 if __name__ == '__main__':
     main()
-
-    if '--version' in sys.argv:
-        print(musicgenerator.__version__)
